@@ -1,3 +1,89 @@
 # Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration
 
 The repository for paper 'Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration in Low Altitude Economy'.
+
+## Abstract
+
+To support the Low Altitude Economy (LAE), precise unmanned aerial vehicles (UAVs) localization in urban areas where global positioning system (GPS) signals are unavailable is crucial. Vision-based methods offer a viable alternative but face severe bandwidth, memory and processing constraints on lightweight UAVs. 
+
+Inspired by mammalian spatial cognition, we propose a task-oriented communication framework, where UAVs equipped with multi-camera systems extract compact multi-view features and offload localization tasks to edge servers. We introduce the **O**rthogonally-constrained **V**ariational **I**nformation **B**ottleneck encoder (O-VIB), which incorporates automatic relevance determination (ARD) to prune non-informative features while enforcing orthogonality to minimize redundancy. This enables efficient and accurate localization with minimal transmission cost.
+
+Extensive evaluation on a dedicated LAE UAV dataset shows that O-VIB achieves high-precision localization under stringent bandwidth budgets.
+
+## System Model
+
+![System Architecture](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/system_model_00.jpg)
+
+Our system operates in a UAV-edge collaborative framework designed for GPS-denied urban environments. The model consists of:
+
+- **Multi-camera UAV System**: Captures multi-directional views (Front, Back, Left, Right, Down) for comprehensive spatial awareness
+- **Edge Server Infrastructure**: Maintains a geo-tagged feature database, enabling efficient localization
+- **Communication-Efficient Design**: Optimizes the trade-off between localization accuracy and bandwidth consumption
+
+The UAV captures multi-view images at each time step, extracts high-dimensional features through a feature extractor, and transmits compressed representations to edge servers. Our objective is to minimize localization error while keeping communication costs below a specified threshold.
+
+## CARLA-based Dataset
+
+![Simulation Environment](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/simulation_00.jpg)
+
+We collected a comprehensive dataset using the CARLA simulator to facilitate research on UAV visual navigation in GPS-denied environments:
+
+### Dataset Specifications:
+- **Environments**: 8 representative urban maps in CARLA
+- **Collection Method**: UAV flying at constant height following road-aligned waypoints with random direction changes
+- **Camera Configuration**: 5 onboard cameras capturing different angles and directions
+- **Image Types**: RGB, semantic, and depth images at 400×300 pixel resolution
+- **Scale**: 357,690 multi-view frames with precise localization and rotation labels
+- **Hardware**: Collected using 4×RTX 5000 Ada GPUs
+
+The dataset provides a realistic simulation of UAV flight in urban environments where GPS signals might be compromised or unavailable.
+
+## Feature Extraction (UAV-side)
+
+![Encoder Architecture](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/encoder_00.jpg)
+
+Our feature extraction pipeline is designed for robust multi-view feature extraction under limited bandwidth:
+
+### Key Components:
+- **CLIP-based Vision Backbone**: Utilizes CLIP Vision Transformer (ViT-B/32) pretrained on large-scale natural image-text pairs
+- **Feature Processing**: Each image undergoes preprocessing (resize, normalize, tokenize) before feature extraction
+- **Normalization**: Features are normalized to lie on the unit hypersphere, improving numerical stability and facilitating cosine similarity-based retrieval
+- **Multi-view Feature Tensor**: Final representation constructed by concatenating view-wise embeddings, capturing a rich panoramic representation of the UAV's surroundings
+
+This pipeline creates a memory base for the visual navigation system, enabling efficient localization with minimal communication overhead.
+
+## Position Prediction (Edge Server-side)
+
+![Decoder Architecture](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/decoder_00.jpg)
+
+The edge server receives compressed representations from the UAV and estimates the UAV's position using a sophisticated multi-view attention fusion mechanism:
+
+### Position Inference:
+- **Multi-view Attention Fusion**: Integrates information from multiple camera views
+- **Hybrid Estimation Method**: Combines direct regression and retrieval-based inference
+- **Adaptive Weighting**: Balances regression and retrieval estimates based on confidence scores
+- **Geo-tagged Database**: Utilized for querying position information
+
+This end-to-end pipeline optimizes the trade-off between localization accuracy and communication efficiency, enabling precise UAV navigation in GPS-denied environments with constrained wireless bandwidth.
+
+## Hardware Implementation
+
+![Hardware Setup](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/hardware_00.jpg)
+
+We validated our approach using a physical testbed with real hardware components:
+
+### Hardware Configuration:
+- **UAV Compute**: Jetson Orin NX 8GB for encoding five camera streams
+- **Communication**: IEEE 802.11 wireless transmission to nearby roadside units (RSUs)
+- **Relay RSU**: Raspberry Pi 5 16GB that forwards data via Gigabit Ethernet to cloud edge servers when overloaded
+- **Edge RSU**: Jetson Orin NX Super 16GB performing on-board inference
+
+This hardware implementation allowed us to evaluate algorithm encoding/decoding complexity and latency in real-world conditions, confirming that our O-VIB framework delivers high-precision localization with minimal bandwidth usage.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+For any questions or discussions, please open an issue or contact us at zhefang4-c [AT] my [DOT] cityu [DOT] edu [DOT] hk.
