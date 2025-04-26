@@ -22,11 +22,11 @@ Our system operates in a UAV-edge collaborative framework designed for GPS-denie
 
 The UAV captures multi-view images at each time step, extracts high-dimensional features through a feature extractor, and transmits compressed representations to edge servers. Our objective is to minimize localization error while keeping communication costs below a specified threshold.
 
-## CARLA-based Dataset
+## Multi-View UAV Dataset
 
 ![Simulation Environment](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/simulation_00.jpg)
 
-We collected a comprehensive dataset using the CARLA simulator to facilitate research on UAV visual navigation in GPS-denied environments:
+We collected a comprehensive dataset using the CARLA simulator to facilitate research on multi-view UAV visual navigation in GPS-denied environments:
 
 ### Dataset Specifications:
 - **Environments**: 8 representative urban maps in CARLA
