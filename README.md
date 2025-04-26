@@ -36,6 +36,17 @@ We collected a comprehensive dataset using the CARLA simulator to facilitate res
 - **Scale**: 357,690 multi-view frames with precise localization and rotation labels
 - **Hardware**: Collected using 4×RTX 5000 Ada GPUs
 
+### Dataset Visualization:
+
+#### RGB Camera View
+![RGB Visualization](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/rgb_animation.gif)
+
+#### Semantic Segmentation View
+![Semantic Visualization](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/semantic_animation.gif)
+
+#### Depth Map View
+![Depth Visualization](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/depth_animation.gif)
+
 The dataset provides a realistic simulation of UAV flight in urban environments where GPS signals might be compromised or unavailable.
 
 ## Feature Extraction (UAV-side)
@@ -80,9 +91,20 @@ We validated our approach using a physical testbed with real hardware components
 
 This hardware implementation allowed us to evaluate algorithm encoding/decoding complexity and latency in real-world conditions, confirming that our O-VIB framework delivers high-precision localization with minimal bandwidth usage.
 
+### Position Prediction Demonstration:
+
+![Position Prediction Demo](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/prediction_video_random.gif)
+
+The animation above demonstrates our system's real-time position prediction capabilities in action, showing the accuracy of our O-VIB approach in GPS-denied environments.
+
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+This work of Y. Fang was supported in part by the Hong Kong SAR Government under the Global STEM Professorship and Research Talent Hub,  the Hong Kong Jockey Club under the Hong Kong JC STEM Lab of Smart City (Ref.: 2023-0108). This work of J. Wang was partly supported by the National Natural Science Foundation of China under Grant No. 62222101 and No. U24A20213, partly supported by the Beijing Natural Science Foundation under Grant No. L232043 and No. L222039, partly supported by the Natural Science Foundation of Zhejiang Province under Grant No. LMS25F010007. The work of S. Hu was supported in part by the Hong Kong Innovation and Technology Commission under InnoHK Project CIMDA. The work of Y. Deng was supported in part by the National Natural Science Foundation of China under Grant No. 62301300. 
 
 ## Contact
 
