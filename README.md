@@ -97,6 +97,10 @@ This hardware implementation allowed us to evaluate algorithm encoding/decoding 
 
 The green dot represents the Ground Truth (GT), which is the actual coordinate of the UAV. The red dot represents the Top 1 prediction (Pred), which is the most accurate prediction. However, Top 2 and Top 3 are alternative prediction locations provided by the algorithm, but their accuracy is usually much lower than the Top 1 prediction.
 
+## Paper
+
+Our research is detailed in the paper: [Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration in Low Altitude Economy](https://www.researchgate.net/publication/391159895_Task-Oriented_Communications_for_Visual_Navigation_with_Edge-Aerial_Collaboration_in_Low_Altitude_Economy)
+
 
 ## License
 
