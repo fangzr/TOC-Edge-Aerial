@@ -95,7 +95,7 @@ This hardware implementation allowed us to evaluate algorithm encoding/decoding 
 
 ![Position Prediction Demo](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/prediction_video_random.gif)
 
-The animation above demonstrates our system's real-time position prediction capabilities in action, showing the accuracy of our O-VIB approach in GPS-denied environments.
+The red dot represents the Ground Truth (GT), which is the actual coordinate of the UAV. The green dot represents the Top 1 prediction (Pred), which is the most accurate prediction. However, Top 2 and Top 3 are alternative prediction locations provided by the algorithm, but their accuracy is usually much lower than the Top 1 prediction.
 
 
 ## License
