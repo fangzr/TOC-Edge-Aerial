@@ -95,7 +95,7 @@ This hardware implementation allowed us to evaluate algorithm encoding/decoding 
 
 ![Position Prediction Demo](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/prediction_video_random.gif)
 
-The red dot represents the Ground Truth (GT), which is the actual coordinate of the UAV. The green dot represents the Top 1 prediction (Pred), which is the most accurate prediction. However, Top 2 and Top 3 are alternative prediction locations provided by the algorithm, but their accuracy is usually much lower than the Top 1 prediction.
+The green dot represents the Ground Truth (GT), which is the actual coordinate of the UAV. The red dot represents the Top 1 prediction (Pred), which is the most accurate prediction. However, Top 2 and Top 3 are alternative prediction locations provided by the algorithm, but their accuracy is usually much lower than the Top 1 prediction.
 
 
 ## License
