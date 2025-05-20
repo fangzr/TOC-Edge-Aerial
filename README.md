@@ -29,13 +29,62 @@ The UAV captures multi-view images at each time step, extracts high-dimensional 
 We collected a comprehensive dataset using the CARLA simulator to facilitate research on multi-view UAV visual navigation in GPS-denied environments:
 
 ### Dataset Specifications:
-- **Environments**: 8 representative urban maps in CARLA
+- **Environments**: 8 representative urban maps in CARLA (Town01, Town02, Town03, Town04, Town05, Town06, Town07, Town10HD)
 - **Collection Method**: UAV flying at constant height following road-aligned waypoints with random direction changes
-- **Camera Configuration**: 5 onboard cameras capturing different angles and directions
+- **Camera Configuration**: 5 onboard cameras capturing different angles and directions (Front, Back, Left, Right, Down)
 - **Image Types**: RGB, semantic, and depth images at 400×300 pixel resolution
 - **Scale**: 357,690 multi-view frames with precise localization and rotation labels
 - **Hardware**: Collected using 4×RTX 5000 Ada GPUs
 - **URL**: [Hugging Face](https://huggingface.co/datasets/Peter341/Multi-View-UAV-Dataset)
+
+### Dataset Structure:
+```
+Dataset_CARLA/Dataset_all/
+├── town01_20241217_215934.tar
+├── town02_20241218_153549.tar
+├── town03_20241217_222228.tar
+├── town04_20241217_225428.tar
+├── town05_20241218_092919.tar
+├── town06_20241217_233050.tar
+├── town07_20241218_153942.tar
+└── town10hd_20241218_151215.tar
+
+town05_20241218_092919/
+├── calibration/
+│   └── camera_calibration.json    # Contains parameters for all 5 UAV onboard cameras
+├── depth/                         # Depth images from all cameras
+│   ├── Back/
+│   │   ├── 000000.npy             # Depth data in NumPy format
+│   │   ├── 000000.png             # Visualization of depth data
+│   │   └── ...
+│   ├── Down/
+│   ├── Front/
+│   ├── Left/
+│   └── Right/
+├── metadata/                      # UAV position, rotation angles and timestamps
+│   ├── 000000.json
+│   ├── 000001.json
+│   └── ...
+├── rgb/                           # RGB images from all cameras (PNG format only)
+│   ├── Back/
+│   ├── Down/
+│   ├── Front/
+│   ├── Left/
+│   └── Right/
+└── semantic/                      # Semantic segmentation images (PNG format only)
+    ├── Back/
+    ├── Down/
+    ├── Front/
+    ├── Left/
+    └── Right/
+```
+
+### Data Format Details:
+- **RGB Images**: Standard PNG format (400×300 pixels)
+- **Semantic Images**: Pixel-wise semantic segmentation in PNG format
+- **Depth Images**: Available in both PNG (visualization) and NumPy (.npy) formats for precise depth values
+- **Metadata**: JSON files containing UAV position coordinates, rotation angles, and timestamps
+- **Calibration**: JSON file with intrinsic and extrinsic parameters for all five cameras
 
 ### Dataset Visualization:
 
@@ -48,7 +97,7 @@ We collected a comprehensive dataset using the CARLA simulator to facilitate res
 #### Depth Map View
 ![Depth Visualization](https://raw.githubusercontent.com/fangzr/TOC-Edge-Aerial/refs/heads/main/figure/depth_animation.gif)
 
-The dataset provides a realistic simulation of UAV flight in urban environments where GPS signals might be compromised or unavailable.
+The dataset provides a realistic simulation of UAV flight in urban environments where GPS signals might be compromised or unavailable. It enables researchers to develop and test novel algorithms for visual navigation, localization, and perception tasks in GPS-denied environments.
 
 ## Feature Extraction (UAV-side)
 
