@@ -35,6 +35,7 @@ We collected a comprehensive dataset using the CARLA simulator to facilitate res
 - **Image Types**: RGB, semantic, and depth images at 400×300 pixel resolution
 - **Scale**: 357,690 multi-view frames with precise localization and rotation labels
 - **Hardware**: Collected using 4×RTX 5000 Ada GPUs
+- **URL**: [Hugging Face](https://huggingface.co/datasets/Peter341/Multi-View-UAV-Dataset)
 
 ### Dataset Visualization:
 
