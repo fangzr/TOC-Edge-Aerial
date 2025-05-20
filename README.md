@@ -160,6 +160,22 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 This work of Y. Fang was supported in part by the Hong Kong SAR Government under the Global STEM Professorship and Research Talent Hub,  the Hong Kong Jockey Club under the Hong Kong JC STEM Lab of Smart City (Ref.: 2023-0108). This work of J. Wang was partly supported by the National Natural Science Foundation of China under Grant No. 62222101 and No. U24A20213, partly supported by the Beijing Natural Science Foundation under Grant No. L232043 and No. L222039, partly supported by the Natural Science Foundation of Zhejiang Province under Grant No. LMS25F010007. The work of S. Hu was supported in part by the Hong Kong Innovation and Technology Commission under InnoHK Project CIMDA. The work of Y. Deng was supported in part by the National Natural Science Foundation of China under Grant No. 62301300. 
 
+## Citation
+
+If you use this code/dataset in your research, please cite our paper:
+
+```bibtex
+@misc{fang2025taskorientedcommunicationsvisualnavigation,
+      title={Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration in Low Altitude Economy}, 
+      author={Zhengru Fang and Zhenghao Liu and Jingjing Wang and Senkang Hu and Yu Guo and Yiqin Deng and Yuguang Fang},
+      year={2025},
+      eprint={2504.18317},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2504.18317}, 
+}
+```
+
 ## Contact
 
 For any questions or discussions, please open an issue or contact us at zhefang4-c [AT] my [DOT] cityu [DOT] edu [DOT] hk.
