@@ -3,8 +3,7 @@
 The repository for paper 'Task-Oriented Communications for Visual Navigation with Edge-Aerial Collaboration in Low Altitude Economy'.
 
 ## Abstract
-
-To support the Low Altitude Economy (LAE), precise unmanned aerial vehicles (UAVs) localization in urban areas where global positioning system (GPS) signals are unavailable is crucial. Vision-based methods offer a viable alternative but face severe bandwidth, memory and processing constraints on lightweight UAVs.
+To support the Low Altitude Economy (LAE), it is essential to achieve precise localization of unmanned aerial vehicles (UAVs) in urban areas where global positioning system (GPS) signals are unavailable. Vision-based methods offer a viable alternative but face severe bandwidth, memory and processing constraints on lightweight UAVs.
 
 Inspired by mammalian spatial cognition, we propose a task-oriented communication framework, where UAVs equipped with multi-camera systems extract compact multi-view features and offload localization tasks to edge servers. We introduce the **O**rthogonally-constrained **V**ariational **I**nformation **B**ottleneck encoder (O-VIB), which incorporates automatic relevance determination (ARD) to prune non-informative features while enforcing orthogonality to minimize redundancy. This enables efficient and accurate localization with minimal transmission cost.
 
