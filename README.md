@@ -4,11 +4,75 @@ The repository for paper 'Task-Oriented Communications for Visual Navigation wit
 
 ## Abstract
 
-To support the Low Altitude Economy (LAE), precise unmanned aerial vehicles (UAVs) localization in urban areas where global positioning system (GPS) signals are unavailable is crucial. Vision-based methods offer a viable alternative but face severe bandwidth, memory and processing constraints on lightweight UAVs. 
+To support the Low Altitude Economy (LAE), precise unmanned aerial vehicles (UAVs) localization in urban areas where global positioning system (GPS) signals are unavailable is crucial. Vision-based methods offer a viable alternative but face severe bandwidth, memory and processing constraints on lightweight UAVs.
 
 Inspired by mammalian spatial cognition, we propose a task-oriented communication framework, where UAVs equipped with multi-camera systems extract compact multi-view features and offload localization tasks to edge servers. We introduce the **O**rthogonally-constrained **V**ariational **I**nformation **B**ottleneck encoder (O-VIB), which incorporates automatic relevance determination (ARD) to prune non-informative features while enforcing orthogonality to minimize redundancy. This enables efficient and accurate localization with minimal transmission cost.
 
 Extensive evaluation on a dedicated LAE UAV dataset shows that O-VIB achieves high-precision localization under stringent bandwidth budgets.
+
+## Repository Layout
+
+1. **`carla_multi_view/` – CARLA-based multi-view data collector**  
+   Connects to CARLA in synchronous mode, spawns five rigidly mounted sensors (RGB, depth, semantic) on the UAV chassis, follows road-aligned waypoints, and writes aligned multi-view frames plus metadata to disk.
+
+2. **`edge_database_encoder/` – Edge-side feature database builder**  
+   Uses CLIP to encode the collected RGB frames, stores per-view descriptors, and aggregates averaged embeddings inside a FAISS index with coordinate supervision.
+
+3. **`uav_lightweight_encoder/` – Lightweight VIB encoder for UAV transmission**  
+   Contains the single-view and multi-view VIB models, training helpers, and CLI tools to compress the multi-view feature tensors into compact latent codes before uplink.
+
+Each folder only keeps the production code required for the above stages—debug scripts, Chinese logs, and ad-hoc experiments were intentionally removed.
+
+### 1. CARLA Multi-View Data Collector
+
+```
+python -m carla_multi_view.collector
+```
+
+Tune `CollectorSettings` inside `carla_multi_view/collector.py` to change the CARLA map, altitude, sampling distance, or output root. The collector:
+
+- configures the CARLA world in synchronous mode and keeps the traffic manager aligned,
+- spawns five cameras with RGB/depth/semantic modalities and keeps them rigidly attached to the UAV body,
+- samples road-following waypoints via `RoadWaypointPlanner`,
+- saves RGB PNGs, depth `.npy` + log-depth PNGs, semantic PNGs, and frame-level metadata JSON files under the configured dataset directory.
+
+### 2. Edge-Side Visual Database Encoding
+
+```
+python -m edge_database_encoder.build_database \
+  --dataset_path /path/to/collected_dataset \
+  --output_path /path/to/database_output \
+  --model_name "ViT-B/32" \
+  --device cuda
+```
+
+The script loads RGB frames plus metadata, extracts CLIP features view-by-view, stores them in `view_features/<camera>/<frame>.npz`, and creates a FAISS index alongside dataset statistics for downstream localization. Use `validate_database` to sanity-check the exported index.
+
+### 3. UAV-Side Lightweight Encoder
+
+**Training**
+
+```
+python -m uav_lightweight_encoder.train_vib \
+  --feature_dir /path/to/database_output \
+  --output ovib_multiview.pt \
+  --mode multi \
+  --latent_dim 64 \
+  --hidden_dims 512 256 \
+  --epochs 50 \
+  --batch_size 128
+```
+
+**Compression**
+
+```
+python -m uav_lightweight_encoder.compress \
+  --feature_dir /path/to/database_output \
+  --weights ovib_multiview.pt \
+  --output /path/to/latent_codes
+```
+
+The training CLI covers both single-view and multi-view VIB models, while `compress.py` loads a trained checkpoint and exports per-frame latent codes ready for transmission.
 
 ## System Model
 
