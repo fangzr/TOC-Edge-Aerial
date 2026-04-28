@@ -1,0 +1,9 @@
+torch
+numpy
+tqdm
+pillow
+opencv-python
+faiss-cpu
+scikit-learn
+# Install OpenAI CLIP with:
+# pip install git+https://github.com/openai/CLIP.git

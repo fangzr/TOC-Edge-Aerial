@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Model and experiment artifacts
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.index
+*.coords
+view_features/
+outputs/
+output/
+logs/
+backups/
+runs/
+wandb/
+
+# Dataset and generated media artifacts
+*.npy
+*.npz
+*.mp4
+*.avi
+*.mov
